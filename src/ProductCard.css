@@ -1,0 +1,191 @@
+/* Product Card Styles - Accessibility First */
+
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+  list-style: none;
+  margin: 0;
+}
+
+/* Make the entire card clickable using pseudo-content technique */
+.product-card .product-title a {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.product-card .product-title a::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+/* Hover state for the entire card */
+.product-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+/* Focus states - progressive enhancement */
+.product-card .product-title a:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+  text-decoration: underline;
+}
+
+.product-card:focus-within {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.product-card:focus-within .product-title a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+/* Strong focus ring for keyboard users only */
+.product-card .product-title a:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+.product-card:focus-within .product-title a:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+  text-decoration: none;
+}
+
+/* Image container */
+.product-image {
+  height: 200px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+/* Content container */
+.product-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1rem;
+  gap: 0.5rem;
+}
+
+/* Product title */
+.product-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #333;
+}
+
+.product-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Reviews section */
+.product-reviews {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.stars {
+  display: flex;
+  gap: 1px;
+}
+
+.star {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.star.full {
+  color: #ffc107;
+}
+
+.star.half {
+  color: #ffc107;
+  opacity: 0.7;
+}
+
+.star.empty {
+  color: #ddd;
+}
+
+.review-count {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Price */
+.product-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #e74c3c;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .product-content {
+    padding: 0.75rem;
+  }
+  
+  .product-title {
+    font-size: 1rem;
+  }
+  
+  .product-price {
+    font-size: 1.1rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .product-card {
+    border: 2px solid #000;
+  }
+  
+  .product-title a:focus {
+    outline: 3px solid #000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .product-card,
+  .product-image img {
+    transition: none;
+  }
+  
+  .product-card:hover .product-image img {
+    transform: none;
+  }
+}
