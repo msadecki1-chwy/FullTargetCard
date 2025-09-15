@@ -33,7 +33,7 @@
 
 /* Hover state for the entire card */
 .product-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.612);
   cursor: pointer;
 }
 
@@ -96,15 +96,20 @@
 /* Product title */
 .product-title {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 0.55rem;
   font-weight: 600;
   line-height: 1.3;
   color: #333;
+  text-align: left;
 }
 
 .product-title a {
   color: inherit;
   text-decoration: none;
+}
+
+.product-card:hover .product-title a {
+  text-decoration: underline;
 }
 
 /* Reviews section */
@@ -145,9 +150,9 @@
 
 /* Price */
 .product-price {
-  font-size: 1.2rem;
+  font-size: 0.96rem;
   font-weight: 700;
-  color: #e74c3c;
+  color: #c51501;
   margin-top: auto;
   padding-top: 0.5rem;
 }
@@ -159,11 +164,11 @@
   }
   
   .product-title {
-    font-size: 1rem;
+    font-size: 0.5rem;
   }
   
   .product-price {
-    font-size: 1.1rem;
+    font-size: 0.88rem;
   }
 }
 

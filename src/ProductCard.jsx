@@ -34,7 +34,7 @@ const ProductCard = ({
       <div className="product-image">
         <img 
           src={productImage} 
-          alt={productImageAlt}
+          alt=""
           loading="lazy"
         />
       </div>
