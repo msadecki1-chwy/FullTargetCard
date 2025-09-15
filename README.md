@@ -11,6 +11,8 @@ This project demonstrates the implementation of an accessible product card compo
 - **High contrast mode support** for users with visual impairments
 - **Reduced motion support** for users with vestibular disorders
 - **Touch-friendly** with appropriate hit targets
+- **Optimized images** with 320px square dimensions and lazy loading
+- **Enhanced hover effects** with card-wide interaction and text decoration
 
 ## Accessibility Implementation
 
@@ -21,7 +23,7 @@ The component uses proper semantic HTML elements:
 ```jsx
 <li className="product-card">
   <div className="product-image">
-    <img src={productImage} alt={productImageAlt} />
+    <img src={productImage} alt="" loading="lazy" />
   </div>
   <div className="product-content">
     <h2 className="product-title">
@@ -39,6 +41,7 @@ The component uses proper semantic HTML elements:
 - `<li>` elements provide list navigation shortcuts for screen readers
 - `<h2>` headings create logical document structure and navigation landmarks
 - The link is placed on the product name only, creating a clear and concise accessible name
+- Empty `alt=""` text prevents redundant announcements since product names are adjacent
 
 ### 2. Accessible Link Implementation
 
@@ -53,8 +56,8 @@ The product name serves as the primary link with a clean accessible name:
 **Key decisions:**
 - Only the product name is included in the accessible name
 - Review information and price are not part of the link text
-- This prevents verbose announcements like "Wireless Bluetooth Headphones, 4.5 stars, 128 reviews, $89.99, link"
-- Screen reader users get clean, descriptive link text: "Wireless Bluetooth Headphones, link"
+- This prevents verbose announcements like "KONG Puppy Chew Dog Toy, Blue, Small, 4.5 stars, 128 reviews, $89.99, link"
+- Screen reader users get clean, descriptive link text: "KONG Puppy Chew Dog Toy, Blue, Small, link"
 
 ### 3. Clickable Card Implementation
 
@@ -112,8 +115,12 @@ Progressive enhancement for focus states:
 #### Hover States
 ```css
 .product-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.612);
   cursor: pointer;
+}
+
+.product-card:hover .product-title a {
+  text-decoration: underline;
 }
 ```
 
@@ -173,16 +180,17 @@ The component handles varying content lengths gracefully:
 ```jsx
 <img 
   src={productImage} 
-  alt={productImageAlt}
+  alt=""
   loading="lazy"
 />
 ```
 
 **Implementation details:**
-- Descriptive alt text for each product image
+- Empty alt text (`alt=""`) prevents redundant announcements since product names are adjacent
 - Lazy loading for performance
-- `object-fit: cover` ensures consistent image dimensions
+- `object-fit: cover` ensures consistent image dimensions (320px square)
 - Images are positioned after the heading in source order for better screen reader experience
+- Follows WCAG guidelines for decorative images that don't add meaningful information beyond adjacent text
 
 ### 8. Star Rating Implementation
 
@@ -266,15 +274,34 @@ const renderStars = (rating) => {
 import ProductCard from './ProductCard';
 
 <ProductCard
-  productName="Wireless Bluetooth Headphones"
-  productImage="https://example.com/image.jpg"
-  productImageAlt="Black wireless Bluetooth headphones with soft ear cushions"
-  productUrl="/products/wireless-headphones"
+  productName="KONG Puppy Chew Dog Toy, Blue, Small"
+  productImage="https://image.chewy.com/is/image/catalog/354334_MAIN._AC_SS320_V1723834035_.jpg"
+  productImageAlt="Blue KONG puppy chew dog toy for small dogs"
+  productUrl="/products/kong-puppy-chew-toy"
   rating={4.5}
   reviewCount={128}
   price="$89.99"
 />
 ```
+
+## Recent Updates
+
+### Styling Improvements
+- **Reduced font sizes**: Product names reduced by 50% (0.55rem), prices reduced by 20% (0.96rem)
+- **Left-aligned text**: Product names are now left-aligned for better readability
+- **Enhanced hover effects**: Product names underline when hovering anywhere on the card
+- **Improved shadow**: Enhanced box-shadow opacity for better visual feedback
+- **Updated color scheme**: Deeper red color (#c51501) for price text
+
+### Accessibility Enhancements
+- **Empty alt text**: Images use `alt=""` to prevent redundant screen reader announcements
+- **Card-wide hover**: Hover effects trigger from anywhere on the card, not just the text
+- **Consistent interaction**: Maintains focus management while improving visual feedback
+
+### Content Updates
+- **Dog toy products**: Updated all example products to showcase dog toys and puppy products
+- **Optimized images**: All images are 320px square for consistent display
+- **Real product data**: Uses actual Chewy catalog images and product names
 
 ## Conclusion
 
